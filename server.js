@@ -456,6 +456,12 @@ const trackConnections = () => {
 // HTTP routes
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
+// Root route: provide a small human-readable page to confirm the server is running
+app.get('/', (req, res) => {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    return res.send(`<!doctype html><html><head><meta charset="utf-8"><title>AppChat Server</title></head><body><h1>AppChat signaling server</h1><p>Status: OK</p><p>Try <a href="/health">/health</a> for JSON.</p></body></html>`);
+});
+
 // Help center articles (lightweight stub)
 app.get('/help/articles', async (req, res) => {
     try {
